@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Calculator ❤️</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    input { padding: 8px; font-size: 1rem; margin: 5px; }
+    button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
+    .result { margin-top: 20px; font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>💕 Love Calculator 💕</h1>
+  <input type="text" id="name1" placeholder="Your name">
+  <input type="text" id="name2" placeholder="Crush / partner's name">
+  <br>
+  <button onclick="calculateLove()">Calculate</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateLove() {
+      const name1 = document.getElementById('name1').value.trim().toLowerCase();
+      const name2 = document.getElementById('name2').value.trim().toLowerCase();
+
+      if (!name1 || !name2) {
+        alert("Please enter both names!");
+        return;
+      }
+
+      // Generate a deterministic 'random' love score
+      let seed = 0;
+      const combined = name1 + name2;
+      for (let i = 0; i < combined.length; i++) {
+        seed += combined.charCodeAt(i);
+      }
+      const score = 50 + (seed % 51);  // gives 50-100
+
+      let message = `${name1} ❤️ ${name2}<br>Your love compatibility is: <strong>${score}%</strong><br>`;
+      if (score > 90) {
+        message += "You two are made for each other! 💍";
+      } else if (score > 75) {
+        message += "There's definitely a strong connection. 🌹";
+      } else if (score > 60) {
+        message += "It could work out with some effort. 💌";
+      } else {
+        message += "Hmm, might need more time to grow. 🥀";
+      }
+
+      document.getElementById('result').innerHTML = message;
+    }
+  </script>
+</body>
+</html>
